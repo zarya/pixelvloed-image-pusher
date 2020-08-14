@@ -14,7 +14,7 @@ class PixelClient():
         if mode == 1:
             self.packetSize = 100
         else:
-            self.packetSize = 100
+            self.packetSize = 210
         self.verModeString = self.SetVersionBit(0) + self.SetRGBAMode(mode)
 
     def _update(self):
