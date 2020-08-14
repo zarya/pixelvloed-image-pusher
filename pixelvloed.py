@@ -12,7 +12,7 @@ class PixelClient():
         self.port = port
         self.mode = mode
         if mode == 1:
-            self.packetSize = 100
+            self.packetSize = 140
         else:
             self.packetSize = 210
         self.verModeString = self.SetVersionBit(0) + self.SetRGBAMode(mode)
