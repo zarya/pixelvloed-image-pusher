@@ -1,4 +1,4 @@
-import sys
+import numpy as np
 import argparse
 from PIL import Image
 from pixelvloed import PixelClient
@@ -17,14 +17,16 @@ _, _, w, h = img.getbbox()
 print(img.getbbox())
 
 pixelflut = PixelClient(args.server, 5005, 0)
+frameArray = [] 
+for frame in range(0,img.n_frames):
+    img.seek(frame)
+    im = img.convert('RGB').rotate(90)
+    frameArray.append(np.array(im))
 
 while True:
-    for frame in range(0,img.n_frames):
-        img.seek(frame)
-        im = img.convert('RGB')
-        for x in range(w):
-            for y in range(h):
-                r, g, b = im.getpixel((x, y))
+    for frame in frameArray:
+        for y in range(w):
+            for x in range(h):
+                r, g, b = frame[x,y] 
                 pixelflut.RGBPixel(x + args.xoffset,y + args.yoffset,r,g,b)
         pixelflut.flush()
-
