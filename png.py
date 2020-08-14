@@ -11,6 +11,7 @@ parser.add_argument("--reload", "-r", help="Reload file in the loop", action="st
 args = parser.parse_args()
 
 img = Image.open(args.file)
+img = img.convert("RGB")
 _, _, w, h = img.getbbox()
 print(img.getbbox())
 
@@ -24,4 +25,5 @@ while True:
     pixelflut.flush()
     if args.reload:
         img = Image.open(args.file)
+        img = img.convert("RGB")
 
